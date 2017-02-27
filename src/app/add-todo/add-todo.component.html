@@ -1,7 +1,7 @@
 <form (ngSubmit)="onSubmit()" #addTodoForm="ngForm">
     <div class="form-group">
         <md-input-container class="container">
-            <input type="text" id="task" [(ngModel)]="todo.task" required name="task"  md-input placeholder="Add your todo here">
+            <input type="text" id="task" [(ngModel)]="todo.task" required name="task"  mdInput placeholder="Add your todo here">
         </md-input-container>
     </div>
     <button type="submit" md-raised-button color="accent" [disabled]="!addTodoForm.form.valid" style="float: right">Add Task</button>
