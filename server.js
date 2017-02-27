@@ -66,7 +66,7 @@ app.get('/showTodos',function(req,res){
         assert.equal(err, null);
         console.log("Successfully connected to MongoDB.");
 
-        db.collection('todos').find({},function (err, docs) {
+        db.collection('todos').find({}).toArray(function (err, docs) {
             assert.equal(err, null);
             db.close();
             res.json(docs)
