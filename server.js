@@ -35,8 +35,7 @@ app.use(forceSSL());
 var MongoClient = require('mongodb').MongoClient,
     assert = require('assert');
 
-app.get('/',function(req,res){
-    
+app.get('/fetch',function(req,res){
     MongoClient.connect('mongodb://naga:password@ds057066.mlab.com:57066/mytodo', function (err, db) {
 
         assert.equal(err, null);
