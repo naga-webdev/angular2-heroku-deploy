@@ -6,7 +6,6 @@ import { TodoService } from '../todo-service/todo.service';
 import { MaterialAlertsService } from '../material-alerts/material-alerts.service';
 
 @Component({
-    moduleId: module.id,
     selector: 'show-todos-component',
     templateUrl: 'show-todos.component.html',
     styleUrls:['show-todos.component.css']

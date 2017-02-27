@@ -4,7 +4,6 @@ import { Todo } from '../models/todo';
 import { TodoService } from '../todo-service/todo.service';
 
 @Component({
-    moduleId: module.id,
     selector: 'home-component',
     templateUrl: 'home.component.html'
 })
