@@ -49,7 +49,7 @@ app.post('/addTodo',function(req,res){
         assert.equal(err, null);
         console.log("Successfully connected to MongoDB.");
 
-        db.collection('todos').insert(todo,function (err, docs) {
+        db.collection('todos').insert(todo).toArray(function (err, docs) {
             assert.equal(err, null);
             db.close();
             res.json(docs)
