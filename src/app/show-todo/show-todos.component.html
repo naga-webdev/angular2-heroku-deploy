@@ -1,0 +1,42 @@
+<md-spinner *ngIf="loading" id="loader"></md-spinner>
+<md-progress-bar mode="indeterminate" *ngIf="loading"></md-progress-bar>
+<div *ngIf="!loading">
+    <!--<a (click)="recentTodos()" style="cursor: pointer;float: right"><h3>view recent Todos</h3></a>-->
+    <div *ngFor="let todo of todos">
+    <md-card>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="thumbnail">
+                    <button md-icon-button color="primary" [mdMenuTriggerFor]="menu" style="float: right"><md-icon>more_vert</md-icon></button>
+                    <md-menu #menu="mdMenu" >
+                        <button md-menu-item [disabled]="todo.completed" (click)="updateTodo(todo._id)"><md-icon>edit</md-icon><span>Finished</span></button>
+                        <button md-menu-item (click)="deleteTodo(todo._id)"><md-icon>delete</md-icon><span>Delete</span></button>
+                    </md-menu>
+                    <div class="caption">
+                        <div *ngIf="!todo.completed">
+                            <h3>{{ todo.task }}</h3>
+                        </div>
+                        <div *ngIf="todo.completed">
+                            <del><i><h3>{{ todo.task }}</h3></i></del>
+                        </div>
+                        <div style="float: right">
+                            <b>Created :</b> {{ todo.created | date:'medium' }}
+                        </div>
+                        <br>
+                        <div *ngIf="todo.updated" style="float: right">
+                            <b>Last updated :</b> {{ todo.updated | date:'medium' }}
+                        </div>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </md-card>
+    </div>
+</div>
+<button md-fab routerLink="/home">
+   <md-icon class="md-24">home</md-icon>
+</button>
+<button md-fab routerLink="/add-todo" style="float: right">
+   <md-icon class="md-24">add</md-icon>
+</button>

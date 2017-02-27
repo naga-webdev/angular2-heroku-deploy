@@ -1,0 +1,31 @@
+<md-chip-list>
+  <md-chip color="primary" selected="pending>0" [disabled]="pending>0" (click)="showPendingTodos()" style="cursor: pointer">Pending Todos <span style="font-size: 20px;">{{ pending }}</span></md-chip>
+  <md-chip color="accent" selected="finished>0" [disabled]="finished>0" (click)="showFinishedTodos()" style="cursor: pointer">Finished Todos <span style="font-size: 20px;">{{ finished }}</span> </md-chip>
+</md-chip-list>
+<br/>
+<div  style="height: 480px; width: 100%; overflow-y: auto;">
+    <div *ngFor="let todo of todos" class="card-style">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <div *ngIf="!todo.completed">
+                            <h3>{{ todo.task }}</h3>
+                        </div>
+                        <div *ngIf="todo.completed">
+                            <del><i><h3>{{ todo.task }}</h3></i></del>
+                        </div>
+                        <div style="float: right">
+                            <b>Created :</b> {{ todo.created | date:'medium' }}
+                        </div>
+                        <br>
+                        <div *ngIf="todo.updated" style="float: right">
+                            <b>Last updated :</b> {{ todo.updated | date:'medium' }}
+                        </div>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

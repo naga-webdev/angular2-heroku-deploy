@@ -31,38 +31,91 @@ app.use(forceSSL());
 
 
 
-
+var mongo = require('mongojs');
 var MongoClient = require('mongodb').MongoClient,
     assert = require('assert');
 
-app.get('/fetch',function(req,res){
-    MongoClient.connect('mongodb://naga:password@ds057066.mlab.com:57066/mytodo', function (err, db) {
+
+app.post('/addTodo',function(req,res){
+    var todo = {
+        task:req.body,
+        completed:false,
+        created:new Date(),
+        updated:null
+    };
+
+     MongoClient.connect('mongodb://naga:password@ds057066.mlab.com:57066/mytodo', function (err, db) {
 
         assert.equal(err, null);
         console.log("Successfully connected to MongoDB.");
 
-        var query = {};        //{"category_code": "biotech"};
-        var projection = {"_id":0};
-
-        db.collection('todos').find(query,projection).toArray(function (err, docs) {
-
+        db.collection('todos').insert(todo,function (err, docs) {
             assert.equal(err, null);
-            assert.notEqual(docs.length, 0);
-
-            docs.forEach(function (doc) {
-                console.log(doc);
-            });
-
             db.close();
             res.json(docs)
         });
 
     });
-    
-    //res.json("home page");
+})
 
-});
 
+app.get('/showTodos',function(req,res){
+
+    MongoClient.connect('mongodb://naga:password@ds057066.mlab.com:57066/mytodo', function (err, db) {
+
+        assert.equal(err, null);
+        console.log("Successfully connected to MongoDB.");
+
+        db.collection('todos').find({},function (err, docs) {
+            assert.equal(err, null);
+            db.close();
+            res.json(docs)
+        });
+
+    });
+})
+
+app.put('/updateTodo/:id',function(req,res){ 
+    var id = req.params.id;
+
+    MongoClient.connect('mongodb://naga:password@ds057066.mlab.com:57066/mytodo', function (err, db) {
+
+        assert.equal(err, null);
+        console.log("Successfully connected to MongoDB.");
+
+        db.collection('todos').findAndModify({
+            query: { _id: mongo.ObjectId(id) },
+            update: {
+                $set: {
+                    completed : true,
+                    updated: new Date()
+                }
+            },
+            new: true
+        },function (err, docs) {
+                assert.equal(err, null);
+                db.close();
+                res.json(docs)
+            });
+
+        });
+})
+
+app.delete('/deleteTodo/:id',function(req,res){
+    var id = req.params.id;
+    MongoClient.connect('mongodb://naga:password@ds057066.mlab.com:57066/mytodo', function (err, db) {
+
+        assert.equal(err, null);
+        console.log("Successfully connected to MongoDB.");
+
+        db.collection('todos').remove({_id:mongo.ObjectId(id)},function (err, docs) {
+            assert.equal(err, null);
+            db.close();
+            res.json(docs)
+        });
+
+    });
+})
 
 // For all GET requests, send back index.html
 // so that PathLocationStrategy can be used
