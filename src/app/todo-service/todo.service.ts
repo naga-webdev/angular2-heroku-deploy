@@ -9,10 +9,10 @@ import { Todo } from '../models/todo';
 export class TodoService {
 
     //private headers = new Headers({'Content-Type': 'application/json'});
-    private todoUrl = 'http://localhost:8008/addTodo';  // URL to web api
-    private todosUrl = 'http://localhost:8008/showTodos';
-    private updateTodoUrl = 'http://localhost:8008/updateTodo';
-    private deleteUrl = 'http://localhost:8008/deleteTodo';
+    private todoUrl = '/addTodo';  // URL to web api
+    private todosUrl = '/showTodos';
+    private updateTodoUrl = '/updateTodo';
+    private deleteUrl = '/deleteTodo';
 
     constructor(private http: Http) { }
 
