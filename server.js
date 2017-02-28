@@ -31,6 +31,7 @@ app.use(forceSSL());
 
 var mongo = require('mongojs');
 var MongoClient = require('mongodb').MongoClient,
+    ObjectId = require('mongodb').ObjectId,
     assert = require('assert');
 
 
@@ -38,6 +39,7 @@ app.post('/addTodo',function(req,res){
     var date = new Date();
     console.log(req.body);
     var todo = {
+        _id: new ObjectId(),
         task:req.body,
         completed:false,
         created:date,
