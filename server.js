@@ -37,10 +37,13 @@ var MongoClient = require('mongodb').MongoClient,
 
 
 app.post('/addTodo',function(req,res){
+
+    var date = new Date();
+    console.log(req.body);
     var todo = {
         task:req.body,
         completed:false,
-        created:new Date(),
+        created:date,
         updated:null
     };
 
