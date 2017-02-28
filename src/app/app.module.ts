@@ -18,7 +18,7 @@ import { MaterialAlertsService } from './material-alerts/index';
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, AppRoutingModule, HttpModule, MaterialModule.forRoot()],
+  imports: [BrowserModule, FormsModule, AppRoutingModule, HttpModule, MaterialModule],
   declarations: [AppComponent, HomeComponent, AddTodoComponent, ShowTodosComponent, PageNotFoundComponent],
   providers: [TodoService, MaterialAlertsService],
   bootstrap: [AppComponent]
