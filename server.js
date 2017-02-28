@@ -29,15 +29,12 @@ const forceSSL = function() {
 // middleware
 app.use(forceSSL());
 
-
-
 var mongo = require('mongojs');
 var MongoClient = require('mongodb').MongoClient,
     assert = require('assert');
 
 
 app.post('/addTodo',function(req,res){
-
     var date = new Date();
     console.log(req.body);
     var todo = {
